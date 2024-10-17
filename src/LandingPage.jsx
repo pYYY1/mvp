@@ -40,7 +40,7 @@ export default function LandingPage() {
           </div>
           <div className="flex space-x-5 items-center">
             <a
-              href="/cadastro"
+              href="/register" // Link para a página de cadastro
               className="text-[15px] leading-[15px] font-inter font-[700] underline text-[#C7D59F] hover:text-[#A7B576]"
             >
               Cadastre-se
