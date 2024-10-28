@@ -1,0 +1,21 @@
+.menu-mobile-enter {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.menu-mobile-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 300ms, opacity 300ms;
+}
+
+.menu-mobile-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.menu-mobile-leave-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 300ms, opacity 300ms;
+}
