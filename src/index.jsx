@@ -5,6 +5,7 @@ import './index.css';
 import LandingPage from './LandingPage';
 import RegisterPage from './RegisterPage'
 import DashBoard from './Dashboard';
+import LoginPage from './LoginPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
     </Router>
