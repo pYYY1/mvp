@@ -12,8 +12,8 @@ export default function Footer() {
     >
       <div className="container mx-auto flex flex-col items-center justify-between px-4">
         <div className="text-center">
-          <h2 className="text-xl font-bold">Entre em Contato</h2>
-          <p className="mt-2">Email: contato@mvp.com</p>
+          <h2 className="text-xl font-bold font-inter">Entre em Contato</h2>
+          <p className="mt-2 font-inter">Email: contato@mvp.com</p>
         </div>
         <div className="flex space-x-6 mt-4">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -26,7 +26,7 @@ export default function Footer() {
             <img src="/img/instagram.png" alt="Instagram" className="w-6 h-6" />
           </a>
         </div>
-        <div className="text-center mt-4">
+        <div className="text-center mt-4 font-inter">
           <p>&copy; {new Date().getFullYear()} MVP. Todos os direitos reservados.</p>
         </div>
       </div>
