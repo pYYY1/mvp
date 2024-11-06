@@ -1,5 +1,5 @@
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default function LandingPage() {
   return (
@@ -17,7 +17,7 @@ export default function LandingPage() {
         <span className="text-custom-green-2 font-inter">MAIS FÁCIL</span> DE
         ORGANIZAR SEUS CAMPEONATOS/TORNEIOS
       </h2>
-      <button className="flex items-center justify-center mx-auto mt-6 px-4 py-2 rounded-md bg-custom-green-1 font-bold text-custom-green-2 hover:bg-opacity-80">
+      <button className="flex items-center justify-center mx-auto mt-6 px-4 py-2 rounded-md bg-custom-green-1 font-bold text-custom-green-2 hover:bg-opacity-70">
         <img
           src="/img/tropy.png"
           alt="Ícone de Troféu"

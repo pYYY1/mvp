@@ -14,7 +14,7 @@ export default function BotaoVoltar() {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-custom-green-2"
+        className="h-6 w-6 text-custom-green-1"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -26,7 +26,7 @@ export default function BotaoVoltar() {
           d="M15 19l-7-7 7-7"
         />
       </svg>
-      <span className="text-gray-600 font-bold font-inter">Voltar</span>
+      <span className="text-custom-green-1 font-bold font-inter">Voltar</span>
     </button>
   );
 }

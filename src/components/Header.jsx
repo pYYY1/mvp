@@ -37,25 +37,25 @@ export default function Header() {
         <nav className="hidden lg-1220:flex flex-row space-x-10">
           <a
             href="/#sobre"
-            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-2"
+            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-1 transition-colors duration-300"
           >
             Sobre o MVP
           </a>
           <a
             href="/#beneficios"
-            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-2"
+            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-1 transition-colors duration-300"
           >
             Benefícios
           </a>
           <a
             href="/#porque"
-            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-2"
+            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-1 transition-colors duration-300"
           >
             Porque escolher o MVP
           </a>
           <a
             href="/#experiencia"
-            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-2"
+            className="text-xl leading-5 font-inter font-[700] text-custom-green-3 hover:text-custom-green-1 transition-colors duration-300"
           >
             Experiência de Torcedor
           </a>
@@ -63,11 +63,11 @@ export default function Header() {
         <div className="hidden lg-1220:flex space-x-5 items-center">
           <a
             href="/register"
-            className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-2"
+            className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
           >
             Cadastre-se
           </a>
-          <button className="w-[100px] h-auto px-5 py-3 rounded-[15px] bg-custom-green-1 shadow-md hover:bg-custom-green-2">
+          <button className="w-[100px] h-auto px-5 py-3 rounded-[15px] bg-custom-green-1 shadow-md hover:bg-custom-green-2 transition-colors duration-300">
             <a
               href="/login"
               className="block w-full h-full font-inter font-[700] text-center text-white"

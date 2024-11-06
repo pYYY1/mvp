@@ -1,7 +1,7 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import BotaoVoltar from "./BotaoVoltar";
-import BotaoProximoPasso from "./BotaoProximoPasso";
+import Footer from "../components/Footer"; 
+import Header from "../components/Header";
+import BotaoVoltar from "../components/BotaoVoltar";
+import BotaoProximoPasso from "../components/BotaoProximoPasso";
 
 export default function GameScreem1() {
   return (

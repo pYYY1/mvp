@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
-import LandingPage from './LandingPage';
-import RegisterPage from './RegisterPage'
-import DashBoard from './Dashboard';
-import GameScreem1 from './GameScreem1';
-import LoginPage from './LoginPage';
+import LandingPage from './App/LandingPage';
+import RegisterPage from './App/RegisterPage'
+import DashBoard from './App/Dashboard';
+import GameScreem1 from './App/GameScreem1';
+import LoginPage from './App/LoginPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

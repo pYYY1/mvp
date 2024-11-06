@@ -1,8 +1,15 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import React from 'react';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { useNavigate } from 'react-router-dom';
 
 export default function DashBoard() {
   const userName = "Nome do Usuário";
+  const navigate = useNavigate();
+
+  const handleCreateChampionship = () => {
+    navigate('/gamescreen1'); // Define a rota para a página desejada
+  };
 
   return (
     <div>
@@ -22,7 +29,10 @@ export default function DashBoard() {
           <p className="text-base text-custom-green-3 mb-2">
             Criar Novo Campeonato
           </p>
-          <button className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2">
+          <button 
+            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            onClick={handleCreateChampionship}
+          >
             Clique Aqui!
           </button>
         </div>
