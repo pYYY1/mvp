@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../UserContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useContext(UserContext);
 
   return (
     <header className="flex flex-col justify-start items-start w-full h-[118px] pl-10 pr-10 pt-3.5 pb-[15px] box-border bg-custom-green-2">
-      {/* Header para telas grandes */}
       <div className="flex flex-row justify-between items-center w-full h-full box-border">
-        {/* Logo */}
         <a href="/" className="w-[100px] h-full">
           <img
             src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/g9y2uzgjngo-176%3A7?alt=media&token=837249ef-06ff-4c65-aa2e-0c83dbdbcba6"
@@ -61,20 +61,36 @@ export default function Header() {
           </a>
         </nav>
         <div className="hidden lg-1220:flex space-x-5 items-center">
-          <a
-            href="/register"
-            className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
-          >
-            Cadastre-se
-          </a>
-          <button className="w-[100px] h-auto px-5 py-3 rounded-[15px] bg-custom-green-1 shadow-md hover:bg-custom-green-2 transition-colors duration-300">
-            <a
-              href="/login"
-              className="block w-full h-full font-inter font-[700] text-center text-white"
-            >
-              Entrar
-            </a>
-          </button>
+          {user ? (
+            <>
+              <span className="text-[15px] leading-[15px] font-inter font-[700] text-custom-green-1">
+                Olá, {user.nome}
+              </span>
+              <button
+                onClick={logout}
+                className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <a
+                href="/register"
+                className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
+              >
+                Cadastre-se
+              </a>
+              <button className="w-[100px] h-auto px-5 py-3 rounded-[15px] bg-custom-green-1 shadow-md hover:bg-custom-green-2 transition-colors duration-300">
+                <a
+                  href="/login"
+                  className="block w-full h-full font-inter font-[700] text-center text-white"
+                >
+                  Entrar
+                </a>
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -90,14 +106,28 @@ export default function Header() {
             alt="Ícone usuário"
             className="w-24 h-24 mt-4 mb-4"
           />
-          <a
-            href="/register"
-            className={`text-center text-sm text-custom-green-3 underline transition-opacity duration-500 ${
-              menuOpen ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            Entre ou Cadastre-se
-          </a>
+          {user ? (
+            <>
+              <span className="text-center text-sm text-custom-green-3 underline transition-opacity duration-500">
+                Olá, {user.nome}
+              </span>
+              <button
+                onClick={logout}
+                className="text-center text-sm text-custom-green-3 underline transition-opacity duration-500"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <a
+              href="/register"
+              className={`text-center text-sm text-custom-green-3 underline transition-opacity duration-500 ${
+                menuOpen ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Entre ou Cadastre-se
+            </a>
+          )}
         </div>
         <div
           className={`flex flex-col items-start mt-4 space-y-4 ml-6 transition-opacity duration-500 pt-10 underline ${
@@ -147,7 +177,7 @@ export default function Header() {
           >
             Fale conosco
           </a>
-          </div>
+        </div>
       </nav>
     </header>
   );

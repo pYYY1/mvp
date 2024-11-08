@@ -2,10 +2,14 @@ import React from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../UserContext";
+import { useContext } from 'react';
 
 export default function DashBoard() {
   const userName = "Nome do Usuário";
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+
 
   const handleCreateChampionship = () => {
     navigate('/gamescreen1'); // Define a rota para a página desejada
@@ -20,10 +24,13 @@ export default function DashBoard() {
           alt="Ícone usuário"
           className="w-24 h-24 mt-4 mb-4"
         />
-        <h1 className="text-black text-2xl font-inter">Olá, {userName}</h1>
+        {user ? (
+          <h1 className="text-black text-2xl font-inter">Olá, {user.nome}</h1>
+        ) : (
+          <h1 className='text-black text-2xl font-inter'>Olá, {userName}</h1>
+        )}
       </div>
 
-      {/* Botões */}
       <div className="flex flex-col items-center mt-8 space-y-6 w-full px-6 font-inter">
         <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
           <p className="text-base text-custom-green-3 mb-2">

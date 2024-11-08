@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RedefinirSenha from "./RedefinirSenha";
+import { UserContext } from "../UserContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +31,8 @@ export default function LoginPage() {
         }
       );
       if (response.status === 200) {
+        const {nome} = response.data;
+        setUser({ email, nome }); 
         navigate("/dashboard");
       } else {
         setError("Erro ao fazer login. Tente novamente.");
@@ -52,7 +56,7 @@ export default function LoginPage() {
           <div className="flex-1 flex items-center justify-center md:justify-start mb-6 md:mb-0">
             <img
               src="/img/Logo PNG (estranho).png"
-              className="max-w-[250px] h-auto md:max-w-[300px] mb-6" // Ajuste para responsividade
+              className="max-w-[250px] h-auto md:max-w-[300px] mb-6" 
               alt="Logo"
             />
           </div>
