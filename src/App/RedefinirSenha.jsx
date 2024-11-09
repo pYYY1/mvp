@@ -208,7 +208,7 @@ const RedefinirSenha = ({ isOpen, onClose }) => {
                         error={error}
                     />
                 )}
-                <button onClick={handleClose} className="mt- 4 w-full text-gray-500 hover:underline">
+                <button onClick={handleClose} className="mt-2 w-full text-gray-500 hover:underline">
                     Fechar
                 </button>
             </div>

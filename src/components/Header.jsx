@@ -1,9 +1,18 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <header className="flex flex-col justify-start items-start w-full h-[118px] pl-10 pr-10 pt-3.5 pb-[15px] box-border bg-custom-green-2">
@@ -63,14 +72,14 @@ export default function Header() {
         <div className="hidden lg-1220:flex space-x-5 items-center">
           {user ? (
             <>
-              <span className="text-[15px] leading-[15px] font-inter font-[700] text-custom-green-1">
+              <span className="text-[18px] leading-[15px] font-inter font-[700] text-custom-green-1">
                 Olá, {user.nome}
               </span>
               <button
-                onClick={logout}
-                className="text-[15px] leading-[15px] font-inter font-[700] underline text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
+                onClick={handleLogout}
+                className="text-[15px] leading-[15px] font-inter font-[700] text-custom-green-1 hover:text-custom-green-3 transition-colors duration-300"
               >
-                Logout
+                <FontAwesomeIcon icon={faSignOutAlt} size="xl"/>
               </button>
             </>
           ) : (
@@ -108,14 +117,14 @@ export default function Header() {
           />
           {user ? (
             <>
-              <span className="text-center text-sm text-custom-green-3 underline transition-opacity duration-500">
+              <span className="text-center text-xl font-medium text-custom-green-3  transition-opacity duration-500">
                 Olá, {user.nome}
               </span>
               <button
-                onClick={logout}
-                className="text-center text-sm text-custom-green-3 underline transition-opacity duration-500"
-              >
-                Logout
+                onClick={handleLogout}
+                className="text-center text-base text-custom-green-3  transition-opacity duration-500 mt-4"
+              > Sair 
+                <FontAwesomeIcon icon={faSignOutAlt} size="xl" className="ml-2"/>
               </button>
             </>
           ) : (
@@ -136,25 +145,25 @@ export default function Header() {
         >
           <a
             href="/#sobre"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Sobre o MVP
           </a>
           <a
             href="/#beneficios"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Benefícios
           </a>
           <a
             href="/#porque"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Porque escolher o MVP
           </a>
           <a
             href="/#experiencia"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Experiência de Torcedor
           </a>
@@ -167,13 +176,13 @@ export default function Header() {
         >
           <a
             href="/"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Configurações
           </a>
           <a
             href="/"
-            className="text-xs leading-8 font-inter text-custom-green-3 text-left"
+            className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
             Fale conosco
           </a>

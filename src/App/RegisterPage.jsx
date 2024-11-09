@@ -73,7 +73,7 @@ export default function RegisterPage() {
                                     type="text" 
                                     id="fullName" 
                                     className="bg-gray-50 border border-[#8FB339] text-gray-900 text-sm rounded-[8px] focus:ring-0 focus:border-[#4B5842] block w-full pl-10 pr-3 p-2.5 transition-colors duration-200 font-inter" 
-                                    placeholder="Nome Completo" 
+                                    placeholder="Primeiro Nome" 
                                     value={nome}
                                     onChange={(e) => setNome(e.target.value)}
                                     required 
