@@ -1,3 +1,4 @@
+import React from 'react';
 import Footer from "../components/Footer"; 
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
@@ -5,7 +6,7 @@ import BotaoProximoPasso from "../components/BotaoProximoPasso";
 
 export default function GameScreem1() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header />
       <BotaoVoltar />
       <div className="flex justify-center mt-4 space-x-1">
@@ -86,7 +87,8 @@ export default function GameScreem1() {
           </div>
         </div>
       </div>
-      <BotaoProximoPasso />
+
+      <BotaoProximoPasso nextPage="/gamescreen2" />
       <Footer />
     </div>
   );
