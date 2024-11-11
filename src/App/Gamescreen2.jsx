@@ -1,38 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
+import { ChavesTimesContext } from "../ChavesTimesContext";
 
-export default function GameScreem2() {
+export default function GameScreen2() {
   const [nomeChave, setNomeChave] = useState("");
-  const [listaChaves, setListaChaves] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const { chaves, setChaves } = useContext(ChavesTimesContext);
 
   const handleEnviarChave = () => {
     if (nomeChave.trim() !== "") {
       if (editIndex !== null) {
-        const updatedChaves = listaChaves.map((chave, index) =>
+        const updatedChaves = chaves.map((chave, index) =>
           index === editIndex ? nomeChave : chave
         );
-        setListaChaves(updatedChaves);
+        setChaves(updatedChaves);
         setEditIndex(null);
       } else {
-        setListaChaves([...listaChaves, nomeChave]);
+        setChaves([...chaves, nomeChave]);
       }
       setNomeChave("");
     }
   };
 
   const handleDeleteChave = (index) => {
-    const updatedChaves = listaChaves.filter((_, i) => i !== index);
-    setListaChaves(updatedChaves);
+    const updatedChaves = chaves.filter((_, i) => i !== index);
+    setChaves(updatedChaves);
   };
 
   const handleEditChave = (index) => {
-    setNomeChave(listaChaves[index]);
+    setNomeChave(chaves[index]);
     setEditIndex(index);
   };
 
@@ -88,7 +89,7 @@ export default function GameScreem2() {
             Lista de Chaves
           </h2>
           <ul className="w-5/6 mt-4">
-            {listaChaves.map((chave, index) => (
+            {chaves.map((chave, index) => (
               <li
                 key={index}
                 className="flex items-center justify-between p-4 mb-4 bg-custom-green-1 text-white text-lg rounded-xl"

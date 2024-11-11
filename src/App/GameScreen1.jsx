@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
 
-export default function GameScreem1() {
+export default function GameScreen1() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

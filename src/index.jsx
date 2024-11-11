@@ -8,12 +8,14 @@ import LandingPage from './App/LandingPage';
 import RegisterPage from './App/RegisterPage';
 import LoginPage from './App/LoginPage';
 import DashBoard from './App/Dashboard';
-import GameScreem1 from './App/GameScreem1';
-import GameScreem2 from './App/Gamescreen2';
-import GameScreem3 from './App/Gamescreen3';
+import GameScreen1 from './App/GameScreen1';
+import GameScreen2 from './App/GameScreen2';
+import GameScreen3 from './App/GameScreen3';
+import GameScreen4 from './App/GameScreen4';
 
 // Contexto
 import { UserProvider } from './UserContext';
+import { ChavesTimesProvider } from './ChavesTimesContext';
 
 // Componentes
 import ProtectedRoute from './components/ProtectedRoute';
@@ -22,17 +24,20 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <Router>
+      <ChavesTimesProvider>
+        <Router>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<ProtectedRoute element={<DashBoard />} />} />
-            <Route path="/gamescreen1" element={<GameScreem1 />} />
-            <Route path="/gamescreen2" element={<GameScreem2 />} />
-            <Route path="/gamescreen3" element={<GameScreem3 />} />
+            <Route path="/gamescreen1" element={<GameScreen1 />} />
+            <Route path="/gamescreen2" element={<GameScreen2 />} />
+            <Route path="/gamescreen3" element={<GameScreen3 />} />
+            <Route path="/gamescreen4" element={<GameScreen4 />} />
           </Routes>
-      </Router>
+        </Router>
+      </ChavesTimesProvider>
     </UserProvider>
   </React.StrictMode>
 );

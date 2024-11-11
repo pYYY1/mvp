@@ -1,38 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
+import { ChavesTimesContext } from "../ChavesTimesContext";
 
-export default function GameScreem3() {
+export default function GameScreen3() {
   const [nomeTime, setNomeTime] = useState("");
-  const [listaTimes, setListaTimes] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+  const { times, setTimes } = useContext(ChavesTimesContext);
 
   const handleEnviarTime = () => {
     if (nomeTime.trim() !== "") {
       if (editIndex !== null) {
-        const updatedTimes = listaTimes.map((time, index) =>
+        const updatedTimes = times.map((time, index) =>
           index === editIndex ? nomeTime : time
         );
-        setListaTimes(updatedTimes);
+        setTimes(updatedTimes);
         setEditIndex(null);
       } else {
-        setListaTimes([...listaTimes, nomeTime]);
+        setTimes([...times, nomeTime]);
       }
       setNomeTime("");
     }
   };
 
   const handleDeleteTime = (index) => {
-    const updatedTimes = listaTimes.filter((_, i) => i !== index);
-    setListaTimes(updatedTimes);
+    const updatedTimes = times.filter((_, i) => i !== index);
+    setTimes(updatedTimes);
   };
 
   const handleEditTime = (index) => {
-    setNomeTime(listaTimes[index]);
+    setNomeTime(times[index]);
     setEditIndex(index);
   };
 
@@ -88,7 +89,7 @@ export default function GameScreem3() {
             Lista de Times
           </h2>
           <ul className="w-5/6 mt-4">
-            {listaTimes.map((time, index) => (
+            {times.map((time, index) => (
               <li
                 key={index}
                 className="flex items-center justify-between p-4 mb-4 bg-custom-green-1 text-white text-lg rounded-xl"
@@ -111,7 +112,7 @@ export default function GameScreem3() {
           </ul>
         </div>
       </div>
-      <BotaoProximoPasso nextPage="/" />
+      <BotaoProximoPasso nextPage="/gamescreen4" />
       <Footer />
     </div>
   );
