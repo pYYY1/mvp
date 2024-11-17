@@ -1,10 +1,16 @@
 import React from 'react';
-import Footer from "../components/Footer"; 
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 export default function GameScreen1() {
+  const handleClockClick = () => {
+    document.getElementById('time').focus();
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -18,10 +24,7 @@ export default function GameScreen1() {
       </div>
 
       <div className="flex flex-col items-start mt-6">
-        <label
-          htmlFor="nomeCampeonato"
-          className="ml-6 text-2xl font-bold mb-2 text-custom-green-2 font-inter"
-        >
+        <label htmlFor="nomeCampeonato" className="ml-6 text-2xl font-bold mb-2 text-custom-green-2 font-inter">
           Nome do Campeonato:
         </label>
         <div className="flex justify-center w-full">
@@ -40,13 +43,11 @@ export default function GameScreen1() {
             Data do Campeonato:
           </p>
           <div className="flex items-center bg-custom-green-3 rounded-md w-60 px-2 py-1 mt-2 border border-custom-green-2">
-            <span className="text-custom-green-2 mr-2">
-              <i className="fas fa-calendar-alt"></i>
-            </span>
             <input
               type="date"
-              className="w-full focus:outline-none text-center bg-custom-green-3"
-              placeholder="Selecione a data"
+              id="date"
+              className="w-full focus:outline-none text-center placeholder:text-custom-green-2 bg-custom-green-3"
+              placeholder="Digite a data (ex: 01/01/2023)"
             />
           </div>
         </div>
@@ -58,14 +59,15 @@ export default function GameScreen1() {
             Horário de Início:
           </p>
           <div className="flex items-center bg-custom-green-3 rounded-md w-60 px-2 py-1 mt-2 border border-custom-green-2">
-            <span className="text-custom-green-2 mr-2">
-              <i className="fas fa-clock"></i>
-            </span>
             <input
               type="time"
-              className="w-full focus:outline-none text-center bg-custom-green-3"
+              id="time"
+              className="w-full focus:outline-none text-center placeholder:text-custom-green-2 bg-custom-green-3"
               placeholder="Selecione o horário"
             />
+            <span className="text-custom-green-2 ml-2 cursor-pointer" onClick={handleClockClick}>
+              <FontAwesomeIcon icon={faClock} />
+            </span>
           </div>
         </div>
       </div>
@@ -81,8 +83,12 @@ export default function GameScreen1() {
             </span>
             <input
               type="text"
-              placeholder="Digite a duração (ex: 30min)"
-              className="w-full focus:outline-none bg-custom-green-3 placeholder:text-black"
+              placeholder="(Padrão - 30min)"
+              className="w-full focus:outline-none bg-custom-green-3 placeholder:text-custom-green-2 text-center"
+              inputMode="numeric"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
+              }}
             />
           </div>
         </div>
