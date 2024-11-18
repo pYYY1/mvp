@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { ChavesTimesContext } from '../ChavesTimesContext';
 
 export default function GameScreen1() {
+  const { horarioInicio, setHorarioInicio, tempoMedio, setTempoMedio } = useContext(ChavesTimesContext);
+
   const handleClockClick = () => {
     document.getElementById('time').focus();
   };
@@ -62,6 +65,8 @@ export default function GameScreen1() {
             <input
               type="time"
               id="time"
+              value={horarioInicio}
+              onChange={(e) => setHorarioInicio(e.target.value)}
               className="w-full focus:outline-none text-center placeholder:text-custom-green-2 bg-custom-green-3"
               placeholder="Selecione o horário"
             />
@@ -83,6 +88,8 @@ export default function GameScreen1() {
             </span>
             <input
               type="text"
+              value={tempoMedio}
+              onChange={(e) => setTempoMedio(e.target.value)}
               placeholder="(Padrão - 30min)"
               className="w-full focus:outline-none bg-custom-green-3 placeholder:text-custom-green-2 text-center"
               inputMode="numeric"

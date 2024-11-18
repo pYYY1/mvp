@@ -74,7 +74,7 @@ export default function GameScreen4() {
           </button>
         </div>
       </div>
-      <BotaoProximoPasso nextPage="/" />
+      <BotaoProximoPasso nextPage="/gamescreen5" />
       <Footer />
     </div>
   );

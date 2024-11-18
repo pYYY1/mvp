@@ -12,6 +12,7 @@ import GameScreen1 from './App/GameScreen1';
 import GameScreen2 from './App/GameScreen2';
 import GameScreen3 from './App/GameScreen3';
 import GameScreen4 from './App/GameScreen4';
+import GameScreen5 from './App/GameScreen5';  
 
 // Contexto
 import { UserProvider } from './UserContext';
@@ -35,6 +36,7 @@ root.render(
             <Route path="/gamescreen2" element={<GameScreen2 />} />
             <Route path="/gamescreen3" element={<GameScreen3 />} />
             <Route path="/gamescreen4" element={<GameScreen4 />} />
+            <Route path="/gamescreen5" element={<GameScreen5 />} />
           </Routes>
         </Router>
       </ChavesTimesProvider>
