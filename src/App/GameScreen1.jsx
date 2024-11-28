@@ -30,7 +30,7 @@ export default function GameScreen1() {
         <BotaoVoltar />
         <div className="flex justify-center mt-4 space-x-1">
           <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
-          <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
+          <div className="w-3 h-3 bg-custom-green-2 rounded-full"></div>
           <div className="w-3 h-3 bg-custom-green-2 rounded-full"></div>
           <div className="w-3 h-3 bg-custom-green-2 rounded-full"></div>
           <div className="w-3 h-3 bg-custom-green-2 rounded-full"></div>
