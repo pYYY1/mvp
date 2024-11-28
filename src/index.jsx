@@ -16,7 +16,7 @@ import GameScreen5 from './App/GameScreen5';
 
 // Contexto
 import { UserProvider } from './UserContext';
-import { ChavesTimesProvider } from './ChavesTimesContext';
+import { ChavesTimesProvider } from './CampeonatoContext';
 
 // Componentes
 import ProtectedRoute from './components/ProtectedRoute';

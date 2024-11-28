@@ -31,8 +31,8 @@ export default function LoginPage() {
         }
       );
       if (response.status === 200) {
-        const {nome} = response.data;
-        setUser({ email, nome }); 
+        const { id, nome } = response.data;
+        setUser({ id, email, nome }); 
         navigate("/dashboard");
       } else {
         setError("Erro ao fazer login. Tente novamente.");

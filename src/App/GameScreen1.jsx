@@ -1,13 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
-import { ChavesTimesContext } from "../ChavesTimesContext";
+import { ChavesTimesContext } from "../CampeonatoContext";
 
 export default function GameScreen1() {
-  const { horarioInicio, setHorarioInicio, tempoMedio, setTempoMedio } =
-    useContext(ChavesTimesContext);
+  const { 
+    nomeCampeonato, setNomeCampeonato,
+    dataCampeonato, setDataCampeonato,
+    horarioInicio, setHorarioInicio,
+    tempoMedio, setTempoMedio
+  } = useContext(ChavesTimesContext);
+
+  const [isNextButtonEnabled, setIsNextButtonEnabled] = useState(false);
+
+  useEffect(() => {
+    if (nomeCampeonato && dataCampeonato && horarioInicio && tempoMedio) {
+      setIsNextButtonEnabled(true);
+    } else {
+      setIsNextButtonEnabled(false);
+    }
+  }, [nomeCampeonato, dataCampeonato, horarioInicio, tempoMedio]);
 
   return (
     <div className="flex flex-col min-h-screen font-inter">
@@ -34,6 +48,8 @@ export default function GameScreen1() {
               id="nomeCampeonato"
               type="text"
               placeholder="Escreva Aqui!"
+              value={nomeCampeonato}
+              onChange={(e) => setNomeCampeonato(e.target.value)}
               className="w-5/6 p-2 border-2 border-custom-green-2 rounded-xl focus:outline-none focus:border-custom-green-1"
             />
           </div>
@@ -48,6 +64,8 @@ export default function GameScreen1() {
               <input
                 type="date"
                 id="date"
+                value={dataCampeonato}
+                onChange={(e) => setDataCampeonato(e.target.value)}
                 className="w-full focus:outline-none text-center placeholder:text-custom-green-2 bg-custom-green-3"
                 placeholder="Digite a data (ex: 01/01/2023)"
               />
@@ -99,7 +117,7 @@ export default function GameScreen1() {
           </div>
         </div>
 
-        <BotaoProximoPasso nextPage="/gamescreen2" />
+        <BotaoProximoPasso nextPage="/gamescreen2" disabled={!isNextButtonEnabled} />
         <Footer />
       </div>
     </div>

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
 import BotaoProximoPasso from "../components/BotaoProximoPasso";
-import { ChavesTimesContext } from "../ChavesTimesContext";
+import { ChavesTimesContext } from "../CampeonatoContext";
 
 export default function GameScreen2() {
   const [nomeChave, setNomeChave] = useState("");

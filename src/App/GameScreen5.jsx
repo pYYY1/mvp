@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import BotaoVoltar from '../components/BotaoVoltar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { ChavesTimesContext } from '../ChavesTimesContext';
+import { ChavesTimesContext } from '../CampeonatoContext';
 
 const GameScreen5 = () => {
   const { chaves, times, horarioInicio, tempoMedio } = useContext(ChavesTimesContext);
