@@ -20,6 +20,9 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  // // Adicionando console log para verificar o user
+  // console.log('User:', user);
+
   return (
     <UserContext.Provider value={{ user, setUser, logout }}>
       {children}

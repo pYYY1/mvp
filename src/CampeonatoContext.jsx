@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext } from 'react';
-import { UserContext } from './UserContext'; // Importe o UserContext
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import { UserContext } from './UserContext';
 
 export const ChavesTimesContext = createContext();
 
@@ -11,7 +12,34 @@ export const ChavesTimesProvider = ({ children }) => {
   const [tempoMedio, setTempoMedio] = useState(30);
   const [chaves, setChaves] = useState([]);
   const [times, setTimes] = useState([]);
-  const [organizadorId, setOrganizadorId] = useState(user?.id || ''); 
+  const [organizadorId, setOrganizadorId] = useState('');
+
+  useEffect(() => {
+    if (user && user.id) {
+      setOrganizadorId(user.id);
+    }
+  }, [user]);
+
+  // Adicionando console log para verificar o user e organizadorId
+  // console.log('User:', user);
+  // console.log('Organizador ID:', organizadorId);
+
+  const saveCampeonato = async () => {
+    try {
+      const data = {
+        nome: nomeCampeonato,
+        dataCampeonato,
+        horarioInicio: new Date(`${dataCampeonato}T${horarioInicio}:00`), 
+        duracaoPartida: Number(tempoMedio), 
+        organizadorId
+      };
+      // console.log('Dados enviados:', data); // Adicionando console log para verificar os dados enviados
+      await axios.post('http://localhost:3000/campeonatos', data);
+      console.log('Campeonato salvo com sucesso!');
+    } catch (error) {
+      console.error('Erro ao salvar dados do campeonato:', error);
+    }
+  };
 
   return (
     <ChavesTimesContext.Provider value={{
@@ -21,7 +49,8 @@ export const ChavesTimesProvider = ({ children }) => {
       tempoMedio, setTempoMedio,
       chaves, setChaves,
       times, setTimes,
-      organizadorId, setOrganizadorId 
+      organizadorId, setOrganizadorId,
+      saveCampeonato
     }}>
       {children}
     </ChavesTimesContext.Provider>

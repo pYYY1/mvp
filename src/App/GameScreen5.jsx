@@ -2,12 +2,13 @@ import React, { useContext, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import BotaoVoltar from '../components/BotaoVoltar';
+import BotaoProximoPasso from '../components/BotaoProximoPasso';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { ChavesTimesContext } from '../CampeonatoContext';
 
 const GameScreen5 = () => {
-  const { chaves, times, horarioInicio, tempoMedio } = useContext(ChavesTimesContext);
+  const { chaves, times, horarioInicio, tempoMedio, saveCampeonato } = useContext(ChavesTimesContext);
   const [showForm, setShowForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [team1, setTeam1] = useState('');
@@ -177,6 +178,10 @@ const GameScreen5 = () => {
     }
   };
 
+  const handleFinalizar = () => {
+    saveCampeonato();
+  };
+
   return (
     <div className="flex flex-col min-h-screen font-inter">
       <Header />
@@ -344,6 +349,14 @@ const GameScreen5 = () => {
               </button>
             </form>
           )}
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={handleFinalizar}
+            className="text-white font-inter bg-custom-green-1 hover:bg-custom-green-2 focus:ring-4 focus:outline-none focus:ring-custom-green-2 font-extrabold rounded-[12px] text-lg px-6 py-3 transition-colors duration-200 shadow-lg hover:shadow-xl active:shadow-none"
+          >
+            Finalizar
+          </button>
         </div>
       </div>
       <Footer />
