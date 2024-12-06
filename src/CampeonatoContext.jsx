@@ -20,10 +20,11 @@ export const ChavesTimesProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Adicionando console log para verificar o user e organizadorId
+  // // Adicionando console log para verificar o user e organizadorId
   // console.log('User:', user);
   // console.log('Organizador ID:', organizadorId);
 
+  // Função para salvar dados do campeonato
   const saveCampeonato = async () => {
     try {
       const data = {
@@ -31,9 +32,10 @@ export const ChavesTimesProvider = ({ children }) => {
         dataCampeonato,
         horarioInicio: new Date(`${dataCampeonato}T${horarioInicio}:00`), 
         duracaoPartida: Number(tempoMedio), 
-        organizadorId
+        organizadorId,
+        chaveamentos: chaves // Enviando os chaveamentos
       };
-      // console.log('Dados enviados:', data); // Adicionando console log para verificar os dados enviados
+      console.log('Dados enviados:', data); // Adicionando console log para verificar os dados enviados
       await axios.post('http://localhost:3000/campeonatos', data);
       console.log('Campeonato salvo com sucesso!');
     } catch (error) {
