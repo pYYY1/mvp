@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BotaoVoltar from "../components/BotaoVoltar";
@@ -8,79 +9,92 @@ import { dividirTimes } from "../components/utils";
 export default function GameScreen5() {
   const { chaves, times, tempoMedio, dataCampeonato, horarioInicio, saveCampeonato } = useContext(ChavesTimesContext);
   const [jogos, setJogos] = useState([]);
+  const navigate = useNavigate();
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  };
+
+  const evitarConfrontosConsecutivos = (jogos) => {
+    for (let i = 1; i < jogos.length; i++) {
+      if (jogos[i].time1 === jogos[i - 1].time1 || jogos[i].time1 === jogos[i - 1].time2 || jogos[i].time2 === jogos[i - 1].time1 || jogos[i].time2 === jogos[i - 1].time2) {
+        if (i + 1 < jogos.length) {
+          [jogos[i], jogos[i + 1]] = [jogos[i + 1], jogos[i]];
+        }
+      }
+    }
+  };
 
   const gerarJogos = useCallback(() => {
     const jogosGerados = [];
     const timesDivididos = dividirTimes(times, chaves.length);
-    let horarioAtual = new Date(`${dataCampeonato}T${horarioInicio}:00`);
 
     for (let i = 0; i < timesDivididos.length; i++) {
       for (let j = 0; j < timesDivididos[i].length; j++) {
         for (let k = j + 1; k < timesDivididos[i].length; k++) {
           jogosGerados.push({
-            horario: new Date(horarioAtual),
             time1: timesDivididos[i][j],
             time2: timesDivididos[i][k],
           });
-          horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
         }
       }
     }
 
-    jogosGerados.push({
-      horario: new Date(horarioAtual),
-      time1: `Vencedor da ${chaves[0]}`,
-      time2: `Segundo da ${chaves[1]}`,
-    });
-    horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
+    // Embaralhar os confrontos comuns
+    shuffleArray(jogosGerados);
 
-    jogosGerados.push({
-      horario: new Date(horarioAtual),
-      time1: `Vencedor da ${chaves[1]}`,
-      time2: `Segundo da ${chaves[0]}`,
-    });
-    horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
+    // Evitar confrontos consecutivos
+    evitarConfrontosConsecutivos(jogosGerados);
 
-    jogosGerados.push({
-      horario: new Date(horarioAtual),
-      time1: "Perdedor da Semifinal 1",
-      time2: "Perdedor da Semifinal 2",
-    });
-    horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
+    // Jogos especiais (semifinais, terceiro lugar e final)
+    const jogosEspeciais = [
+      {
+        time1: `Vencedor da ${chaves[0]}`,
+        time2: `Segundo da ${chaves[1]}`,
+      },
+      {
+        time1: `Vencedor da ${chaves[1]}`,
+        time2: `Segundo da ${chaves[0]}`,
+      },
+      {
+        time1: "Perdedor da Semifinal 1",
+        time2: "Perdedor da Semifinal 2",
+      },
+      {
+        time1: "Vencedor da Semifinal 1",
+        time2: "Vencedor da Semifinal 2",
+      },
+    ];
 
-    jogosGerados.push({
-      horario: new Date(horarioAtual),
-      time1: "Vencedor da Semifinal 1",
-      time2: "Vencedor da Semifinal 2",
+    // Concatenar jogos comuns embaralhados com jogos especiais
+    const todosJogos = [...jogosGerados, ...jogosEspeciais];
+
+    // Atribuir horários aos confrontos
+    let horarioAtual = new Date(`${dataCampeonato}T${horarioInicio}:00`);
+    const jogosComHorarios = todosJogos.map((jogo) => {
+      const jogoComHorario = {
+        ...jogo,
+        horario: new Date(horarioAtual),
+      };
+      horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
+      return jogoComHorario;
     });
 
-    setJogos(jogosGerados);
+    setJogos(jogosComHorarios);
   }, [chaves, dataCampeonato, horarioInicio, tempoMedio, times]);
 
   useEffect(() => {
     gerarJogos();
   }, [gerarJogos]);
 
-  const handleAdicionarJogo = (index) => {
-    const novoJogo = {
-      horario: new Date(),
-      time1: "",
-      time2: "",
-    };
-    const novosJogos = [...jogos];
-    novosJogos.splice(index, 0, novoJogo);
-    setJogos(novosJogos);
-  };
-
-  const handleRemoverJogo = (index) => {
-    const novosJogos = jogos.filter((_, i) => i !== index);
-    setJogos(novosJogos);
-  };
-
   const handleFinalizarCampeonato = async () => {
     try {
       await saveCampeonato(jogos);
       console.log("Campeonato e jogos salvos com sucesso!");
+      navigate("/dashboard"); // Redirecionar para a dashboard do organizador
     } catch (error) {
       console.error("Erro ao finalizar campeonato:", error);
     }
@@ -96,7 +110,7 @@ export default function GameScreen5() {
           <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
           <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
           <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
-          <div className="w-3 h-3 bg-custom-green-2 rounded-full"></div>
+          <div className="w-3 h-3 bg-custom-green-1 rounded-full"></div>
         </div>
 
         <div className="flex justify-center mt-10">
@@ -110,7 +124,6 @@ export default function GameScreen5() {
                 <th className="px-4 py-2">Horário Previsto</th>
                 <th className="px-4 py-2">Time 1</th>
                 <th className="px-4 py-2">Time 2</th>
-                <th className="px-4 py-2">Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -119,10 +132,6 @@ export default function GameScreen5() {
                   <td className="border px-4 py-2">{jogo.horario.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                   <td className="border px-4 py-2">{jogo.time1}</td>
                   <td className="border px-4 py-2">{jogo.time2}</td>
-                  <td className="border px-4 py-2">
-                    <button onClick={() => handleRemoverJogo(index)} className="text-red-500">Remover</button>
-                    <button onClick={() => handleAdicionarJogo(index)} className="text-blue-500 ml-2">Adicionar</button>
-                  </td>
                 </tr>
               ))}
             </tbody>
