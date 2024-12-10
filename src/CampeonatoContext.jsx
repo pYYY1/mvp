@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from './UserContext';
+import { dividirTimes } from './components/utils'; 
 
 export const ChavesTimesContext = createContext();
 
@@ -20,12 +21,10 @@ export const ChavesTimesProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Adicionando console log para verificar o user e organizadorId
   console.log('User:', user);
   console.log('Organizador ID:', organizadorId);
 
-  // Função para salvar dados do campeonato
-  const saveCampeonato = async () => {
+  const saveCampeonato = async (jogos) => {
     try {
       const timesDivididos = dividirTimes(times, chaves.length);
       const data = {
@@ -34,26 +33,17 @@ export const ChavesTimesProvider = ({ children }) => {
         horarioInicio: new Date(`${dataCampeonato}T${horarioInicio}:00`), 
         duracaoPartida: Number(tempoMedio), 
         organizadorId,
-        chaveamentos: chaves, // Enviando os chaveamentos
-        times: timesDivididos // Enviando os times divididos
+        chaveamentos: chaves,
+        times: timesDivididos,
+        jogos
       };
-      console.log('Dados enviados:', data); // Adicionando console log para verificar os dados enviados
+      console.log('Dados enviados:', data);
       await axios.post('http://localhost:3000/campeonatos', data);
       console.log('Campeonato salvo com sucesso!');
     } catch (error) {
-      console.error('Erro ao salvar dados do campeonato:', error);
+      console.error('Erro ao salvar dados do campeonato:', error.response ? error.response.data : error.message);
+      throw error;
     }
-  };
-
-  const dividirTimes = (times, numChaves) => {
-    const result = [];
-    for (let i = 0; i < numChaves; i++) {
-      result.push([]);
-    }
-    for (let i = 0; i < times.length; i++) {
-      result[i % numChaves].push(times[i]);
-    }
-    return result;
   };
 
   return (
