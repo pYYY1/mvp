@@ -10,7 +10,13 @@ export default function DashBoard() {
   const { user } = useContext(UserContext);
 
   const handleCreateChampionship = () => {
-    navigate('/gamescreen1'); 
+    navigate('/gamescreen1');
+  };
+  const handleViewScheduledChampionships = () => {
+    navigate('/agendados');
+  };
+  const handleViewHistory = () => {
+    navigate('/historico');
   };
 
   return (
@@ -34,28 +40,33 @@ export default function DashBoard() {
           <p className="text-base text-custom-green-3 mb-2">
             Criar Novo Campeonato
           </p>
-          <button 
+          <button
             className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
             onClick={handleCreateChampionship}
           >
             Clique Aqui!
           </button>
         </div>
-
         <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
           <p className="text-base text-custom-green-3 mb-2">
-            Lista de Campeonatos
+            Campeonatos Agendados
           </p>
-          <button className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2">
+          <button
+            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            onClick={handleViewScheduledChampionships}
+          >
             Clique Aqui!
           </button>
         </div>
-
+        
         <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
           <p className="text-base text-custom-green-3 mb-2">
             Histórico de Campeonatos
           </p>
-          <button className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2">
+          <button
+            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            onClick={handleViewHistory}
+          >
             Clique Aqui!
           </button>
         </div>
