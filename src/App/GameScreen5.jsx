@@ -43,13 +43,10 @@ export default function GameScreen5() {
       }
     }
 
-    // Embaralhar os confrontos comuns
     shuffleArray(jogosGerados);
 
-    // Evitar confrontos consecutivos
     evitarConfrontosConsecutivos(jogosGerados);
 
-    // Jogos especiais (semifinais, terceiro lugar e final)
     const jogosEspeciais = [
       {
         time1: `Vencedor da ${chaves[0]}`,
@@ -69,19 +66,25 @@ export default function GameScreen5() {
       },
     ];
 
-    // Concatenar jogos comuns embaralhados com jogos especiais
     const todosJogos = [...jogosGerados, ...jogosEspeciais];
 
-    // Atribuir horários aos confrontos
     let horarioAtual = new Date(`${dataCampeonato}T${horarioInicio}:00`);
     const jogosComHorarios = todosJogos.map((jogo) => {
       const jogoComHorario = {
         ...jogo,
         horario: new Date(horarioAtual),
       };
-      horarioAtual.setMinutes(horarioAtual.getMinutes() + tempoMedio);
+
+      horarioAtual.setMinutes(horarioAtual.getMinutes() + Number(tempoMedio));
+      if (horarioAtual.getHours() >= 24) {
+        horarioAtual.setDate(horarioAtual.getDate() + 1);
+        horarioAtual.setHours(0);
+        horarioAtual.setMinutes(0);
+      }
       return jogoComHorario;
     });
+
+    jogosComHorarios.sort((a, b) => a.horario - b.horario);
 
     setJogos(jogosComHorarios);
   }, [chaves, dataCampeonato, horarioInicio, tempoMedio, times]);
