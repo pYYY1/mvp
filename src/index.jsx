@@ -15,7 +15,7 @@ import GameScreen4 from './App/GameScreen4';
 import GameScreen5 from './App/GameScreen5';
 import Historico from './App/Historico';
 import Agendados from "./App/Agendados";
-import Jogos from "./App/Jogos"; // Importando a página Jogos
+import Jogos from "./App/Jogos"; 
 
 // Contexto
 import { UserProvider } from './UserContext';
