@@ -47,8 +47,11 @@ const Agendados = () => {
     setSearchTerm(e.target.value);
   };
 
+console.log('loading:', loading);
+console.log('error:', error);
+
   const handleCopyLink = (linkAcesso) => {
-    const link = `http://localhost:3000/campeonatos/public/${linkAcesso}`;
+    const link = `http://localhost:3001/jogos/${linkAcesso}`;
     navigator.clipboard.writeText(link)
       .then(() => alert("Link copiado com sucesso!"))
       .catch(() => alert("Erro ao copiar o link."));
