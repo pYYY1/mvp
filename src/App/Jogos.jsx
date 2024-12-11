@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Jogos = () => {
   const { linkAcesso } = useParams();
   const [jogos, setJogos] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/campeonatos/public/${linkAcesso}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.chaveamento) {
-          setJogos(data.chaveamento.flatMap(chave => chave.jogos));
+    const fetchJogos = async () => {
+      try {
+        console.log('Iniciando fetch com linkAcesso:', linkAcesso);
+
+        const response = await axios.get(`http://localhost:3000/campeonatos/public/${linkAcesso}`);
+        const data = response.data;
+        console.log('Dados recebidos da API:', data);
+
+        if (Array.isArray(data.jogos)) {
+          setJogos(data.jogos);
+        } else {
+          console.log('Nenhum jogo encontrado na resposta.');
+          setJogos([]);
         }
-      })
-      .catch(error => console.error('Erro ao carregar os jogos:', error));
+      } catch (error) {
+        console.error('Erro ao carregar os jogos:', error);
+      }
+    };
+
+    fetchJogos();
   }, [linkAcesso]);
+
 
   return (
     <div>
@@ -25,15 +39,21 @@ const Jogos = () => {
         jogos.map(jogo => (
           <div key={jogo.id}>
             <h3>Jogo {jogo.id}</h3>
-            <p>Time Casa: {jogo.timeCasa.nome}</p>
-            <p>Time Visitante: {jogo.timeVisitante.nome}</p>
+            <p>Time Casa: {jogo.timeCasaNome}</p>
+            <p>Time Visitante: {jogo.timeVisitanteNome}</p>
             <p>Horário: {new Date(jogo.horario).toLocaleString()}</p>
-            <p>Placar: {jogo.placar.timeCasa} x {jogo.placar.timeVisitante}</p>
+            {jogo.placar ? (
+              <p>Placar: {jogo.placar.timeCasa || 0} x {jogo.placar.timeVisitante || 0}</p>
+            ) : (
+              <p>Placar: Não disponível</p>
+            )}
             {jogo.sets && jogo.sets.length > 0 && (
               <div>
                 <h4>Sets:</h4>
                 {jogo.sets.map((set, index) => (
-                  <p key={index}>Set {set.set}: {set.placar.timeCasa} x {set.placar.timeVisitante}</p>
+                  <p key={index}>
+                    Set {set.set}: {set.placar.timeCasa} x {set.placar.timeVisitante}
+                  </p>
                 ))}
               </div>
             )}

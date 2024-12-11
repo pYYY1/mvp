@@ -9,13 +9,13 @@ import RegisterPage from './App/RegisterPage';
 import LoginPage from './App/LoginPage';
 import DashBoard from './App/Dashboard';
 import GameScreen1 from './App/GameScreen1';
-import GameScreen2 from './App/GameScreen2';
-import GameScreen3 from './App/GameScreen3';
+import GameScreen2 from './App/Gamescreen2';
+import GameScreen3 from './App/Gamescreen3';
 import GameScreen4 from './App/GameScreen4';
 import GameScreen5 from './App/GameScreen5';
 import Historico from './App/Historico';
 import Agendados from "./App/Agendados";
-import Jogos from "./App/Jogos"; // Importando a página Jogos
+import Jogos from "./App/Jogos"; 
 
 // Contexto
 import { UserProvider } from './UserContext';
