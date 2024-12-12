@@ -52,7 +52,7 @@ export default function GameScreen3() {
 
         <div className="flex justify-center mt-10">
           <h1 className="text-3xl font-bold text-custom-green-2">
-            Times
+            Times:
           </h1>
         </div>
 

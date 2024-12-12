@@ -97,7 +97,7 @@ export default function GameScreen5() {
     try {
       await saveCampeonato(jogos);
       console.log("Campeonato e jogos salvos com sucesso!");
-      navigate("/dashboard"); // Redirecionar para a dashboard do organizador
+      navigate("/dashboard"); 
     } catch (error) {
       console.error("Erro ao finalizar campeonato:", error);
     }
@@ -117,7 +117,7 @@ export default function GameScreen5() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <h1 className="text-3xl font-bold text-custom-green-2">Tabela de Jogos</h1>
+          <h1 className="text-3xl font-bold text-custom-green-2">Tabela de Jogos:</h1>
         </div>
 
         <div className="flex flex-col items-center mt-10 w-5/6 mx-auto">

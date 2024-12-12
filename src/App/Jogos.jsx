@@ -99,7 +99,6 @@ const Jogos = () => {
         };
         console.log('Enviando set:', setData);
 
-        // Verificar se o set já existe
         const response = await axios.get(`http://localhost:3000/sets`, {
           params: {
             jogoId: setData.jogoId,
@@ -108,11 +107,9 @@ const Jogos = () => {
         });
 
         if (response.data.length > 0) {
-          // Atualizar set existente
           await axios.put(`http://localhost:3000/sets/${response.data[0].id}`, setData);
           console.log(`Set ${setData.numero} atualizado`);
         } else {
-          // Criar novo set
           await axios.post('http://localhost:3000/sets', setData);
           console.log(`Set ${setData.numero} criado`);
         }
@@ -149,7 +146,7 @@ const Jogos = () => {
       <Header />
       <div className="flex-grow">
         <BotaoVoltar />
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-4 mb-6">
           <h1 className="text-3xl font-bold text-custom-green-2 text-center">{campeonato.nome}</h1>
         </div>
         <div className="container mx-auto p-4 flex-grow">
@@ -205,7 +202,7 @@ const Jogos = () => {
                         jogo.sets.map((set, setIndex) => (
                           <div
                             key={setIndex}
-                            className="flex justify-between text-white text-sm font-medium mb-1"
+                            className="flex justify-between text-white text-sm font-bold mb-1"
                           >
                             <span>{setIndex + 1} Set</span>
                             <span>

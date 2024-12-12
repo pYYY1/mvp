@@ -217,4 +217,4 @@ const Historico = () => {
   );
 };
 
-export default Historico;
+export default Historico;

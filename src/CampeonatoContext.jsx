@@ -21,9 +21,6 @@ export const ChavesTimesProvider = ({ children }) => {
     }
   }, [user]);
 
-  console.log('User:', user);
-  console.log('Organizador ID:', organizadorId);
-
   const saveCampeonato = async (jogos) => {
     try {
       const timesDivididos = dividirTimes(times, chaves.length);
@@ -37,7 +34,6 @@ export const ChavesTimesProvider = ({ children }) => {
         times: timesDivididos,
         jogos
       };
-      console.log('Dados enviados:', data);
       await axios.post('http://localhost:3000/campeonatos', data);
       console.log('Campeonato salvo com sucesso!');
     } catch (error) {
