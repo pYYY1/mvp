@@ -175,10 +175,10 @@ export default function Header() {
           }`}
         >
           <a
-            href="/"
+            href="/dashboard"
             className="text-sm leading-8 font-inter text-custom-green-3 text-left"
           >
-            Configurações
+            Dashboard do Organizador
           </a>
           <a
             href="/"

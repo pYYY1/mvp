@@ -17,11 +17,9 @@ import Historico from './App/Historico';
 import Agendados from "./App/Agendados";
 import Jogos from "./App/Jogos"; 
 
-// Contexto
 import { UserProvider } from './UserContext';
 import { ChavesTimesProvider } from './CampeonatoContext';
 
-// Componentes
 import ProtectedRoute from './components/ProtectedRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -42,8 +40,6 @@ root.render(
             <Route path="/gamescreen5" element={<GameScreen5 />} />
             <Route path="/historico" element={<Historico />} />
             <Route path="/agendados" element={<Agendados />} />
-
-            {/* Alteração na rota de Jogos */}
             <Route path="/jogos/:linkAcesso" element={<Jogos />} />
           </Routes>
         </Router>

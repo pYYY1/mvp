@@ -183,7 +183,7 @@ const RedefinirSenha = ({ isOpen, onClose }) => {
                         onNext={() => setStep(2)}
                         error={error}
                         message={message}
-                        handleEnviarCodigo={handleEnviarCodigo} // Passando a função correta
+                        handleEnviarCodigo={handleEnviarCodigo}
                     />
                 )}
                 {step === 2 && (

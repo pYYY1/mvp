@@ -29,42 +29,42 @@ export default function DashBoard() {
           className="w-24 h-24 mt-4 mb-4"
         />
         {user ? (
-          <h1 className="text-black text-2xl font-inter">Olá, {user.nome}</h1>
+          <h1 className="text-black text-2xl font-regular font-inter">Olá, {user.nome}</h1>
         ) : (
-          <h1 className='text-black text-2xl font-inter'>Olá, {userName}</h1>
+          <h1 className='text-black text-2xl font-regular font-inter'>Olá, {userName}</h1>
         )}
       </div>
 
       <div className="flex flex-col items-center mt-8 space-y-6 w-full px-6 font-inter flex-grow">
-        <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
-          <p className="text-base text-custom-green-3 mb-2">
+        <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-4 shadow-md">
+          <p className="text-lg text-custom-green-3 mb-2">
             Criar Novo Campeonato
           </p>
           <button
-            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            className="bg-custom-green-1 text-white rounded-xl w-8/12 px-8 py-2 mt-2"
             onClick={handleCreateChampionship}
           >
             Clique Aqui!
           </button>
         </div>
-        <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
-          <p className="text-base text-custom-green-3 mb-2">
+        <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-4 shadow-md">
+          <p className="text-lg text-custom-green-3 mb-2">
             Campeonatos Agendados
           </p>
           <button
-            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            className="bg-custom-green-1 text-white rounded-xl w-8/12 px-8 py-2 mt-2"
             onClick={handleViewScheduledChampionships}
           >
             Clique Aqui!
           </button>
         </div>
         
-        <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-4 shadow-md">
-          <p className="text-base text-custom-green-3 mb-2">
+        <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-4 shadow-md">
+          <p className="text-lg text-custom-green-3 mb-2">
             Histórico de Campeonatos
           </p>
           <button
-            className="bg-custom-green-1 text-white rounded-xl w-10/12 px-8 py-2 mt-2"
+            className="bg-custom-green-1 text-white rounded-xl w-8/12 px-8 py-2 mt-2"
             onClick={handleViewHistory}
           >
             Clique Aqui!

@@ -52,7 +52,7 @@ export default function GameScreen2() {
 
         <div className="flex justify-center mt-10">
           <h1 className="text-3xl font-bold text-custom-green-2">
-            Chaveamento
+            Criar Chaves:
           </h1>
         </div>
 
