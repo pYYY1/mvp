@@ -2,7 +2,7 @@
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 300ms ease-out, opacity 300ms ease-out;
+  transition: max-height 1500ms ease-out, opacity 1500ms ease-out;
 }
 .expand-enter-active {
   max-height: 500px;
@@ -12,7 +12,7 @@
   max-height: 500px;
   opacity: 1;
   overflow: hidden;
-  transition: max-height 300ms ease-in, opacity 300ms ease-in;
+  transition: max-height 500ms ease-in, opacity 500ms ease-in;
 }
 .expand-exit-active {
   max-height: 0;
