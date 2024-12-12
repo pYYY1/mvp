@@ -141,6 +141,25 @@ const Jogos = () => {
     setPlacar({ ...placar, sets: [...placar.sets, newSet] });
   };
 
+  const handleSetChange = (index, field, value) => {
+    const newSets = [...placar.sets];
+    newSets[index] = { ...newSets[index], [field]: Number(value) };
+
+    // Atualizar o placar com base nos pontos dos sets
+    let setsTimeCasa = 0;
+    let setsTimeVisitante = 0;
+
+    newSets.forEach(set => {
+      if (set.pontosCasa > set.pontosVisitante) {
+        setsTimeCasa += 1;
+      } else if (set.pontosVisitante > set.pontosCasa) {
+        setsTimeVisitante += 1;
+      }
+    });
+
+    setPlacar({ ...placar, sets: newSets, setsTimeCasa, setsTimeVisitante });
+  };
+
   return (
     <div className="flex flex-col min-h-screen font-inter">
       <Header />
@@ -235,22 +254,14 @@ const Jogos = () => {
                   <input
                     type="number"
                     value={set.pontosCasa}
-                    onChange={(e) => {
-                      const newSets = [...placar.sets];
-                      newSets[setIndex] = { ...newSets[setIndex], pontosCasa: e.target.value };
-                      setPlacar({ ...placar, sets: newSets });
-                    }}
+                    onChange={(e) => handleSetChange(setIndex, 'pontosCasa', e.target.value)}
                     className="mt-1 block w-full rounded-lg border-custom-green-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-10 bg-white border-2 text-center"
                   />
                   <span className="text-lg font-bold text-center">x</span>
                   <input
                     type="number"
                     value={set.pontosVisitante}
-                    onChange={(e) => {
-                      const newSets = [...placar.sets];
-                      newSets[setIndex] = { ...newSets[setIndex], pontosVisitante: e.target.value };
-                      setPlacar({ ...placar, sets: newSets });
-                    }}
+                    onChange={(e) => handleSetChange(setIndex, 'pontosVisitante', e.target.value)}
                     className="mt-1 block w-full rounded-lg border-custom-green-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-10 bg-white border-2 text-center"
                   />
                 </div>
