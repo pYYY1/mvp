@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { UserContext } from "../UserContext";
 import { Link } from "react-router-dom";
 import { HiDotsVertical, HiSearch } from "react-icons/hi";
@@ -6,16 +6,21 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BotaoVoltar from "../components/BotaoVoltar";
 import ModalConfirmacao from "../components/ModalConfirmacao.jsx";
+import Alert from "../components/Alert";
 
 const Agendados = () => {
   const { user } = useContext(UserContext);
   const [campeonatos, setCampeonatos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [campeonatoToDelete, setCampeonatoToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+
   useEffect(() => {
     const fetchCampeonatos = async () => {
       try {
@@ -34,10 +39,7 @@ const Agendados = () => {
         setCampeonatos(agendadosList);
       } catch (error) {
         console.error("Erro:", error);
-        setError("Não foi possível carregar os campeonatos.");
-      } finally {
-        setLoading(false);
-      }
+    }
     };
 
     fetchCampeonatos();
@@ -47,14 +49,17 @@ const Agendados = () => {
     setSearchTerm(e.target.value);
   };
 
-console.log('loading:', loading);
-console.log('error:', error);
-
   const handleCopyLink = (linkAcesso) => {
-    const link = `http://localhost:3001/jogos/${linkAcesso}`;
+    const link = `${window.location.origin}/jogos/${linkAcesso}`;
     navigator.clipboard.writeText(link)
-      .then(() => alert("Link copiado com sucesso!"))
-      .catch(() => alert("Erro ao copiar o link."));
+      .then(() => {
+        setAlertMessage("Link copiado com sucesso!");
+        setAlertVisible(true);
+      })
+      .catch(() => {
+        setAlertMessage("Erro ao copiar o link.");
+        setAlertVisible(true);
+      });
   };
 
   const handleDelete = (id) => {
@@ -74,10 +79,12 @@ console.log('error:', error);
         }
 
         setCampeonatos((prev) => prev.filter((campeonato) => campeonato.id !== campeonatoToDelete));
-        alert("Campeonato excluído com sucesso!");
+        setAlertMessage("Campeonato excluído com sucesso!");
+        setAlertVisible(true);
       } catch (error) {
         console.error("Erro ao excluir:", error);
-        alert("Falha ao excluir o campeonato.");
+        setAlertMessage("Falha ao excluir o campeonato.");
+        setAlertVisible(true);
       }
     }
     setModalOpen(false);
@@ -85,10 +92,27 @@ console.log('error:', error);
   };
 
   const cancelDelete = () => {
-    setModalOpen(false); 
-    setCampeonatoToDelete(null); 
+    setModalOpen(false);
+    setCampeonatoToDelete(null);
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+      setOpenMenuId(null);
+    }
+  };
+
+  useEffect(() => {
+    if (openMenuId !== null) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openMenuId]);
 
   return (
     <div className="flex flex-col min-h-screen font-inter">
@@ -97,7 +121,7 @@ console.log('error:', error);
         <BotaoVoltar />
         <div className="flex-grow">
           <div className="flex justify-center mt-4">
-            <h1 className="text-3xl font-bold text-custom-green-2">Campeonatos Agendados</h1>
+            <h1 className="text-2xl font-bold text-custom-green-2">Campeonatos Agendados</h1>
           </div>
           <div className="flex justify-center mt-6">
             <div className="relative w-4/5 max-w-md">
@@ -118,22 +142,27 @@ console.log('error:', error);
             ) : (
               <ul className="space-y-6 w-full max-w-4xl mx-auto">
                 {campeonatos
-                  .filter((campeonato) => campeonato.nome.toLowerCase().includes(searchTerm.toLowerCase())) // Filtro de pesquisa
+                  .filter((campeonato) => campeonato.nome.toLowerCase().includes(searchTerm.toLowerCase()))
                   .map((campeonato) => (
                     <li key={campeonato.id} className="p-4 bg-custom-green-2 text-white shadow-lg rounded-lg border-custom-green-1 flex justify-between items-center relative">
                       <h3 className="text-base font-semibold">{campeonato.nome}</h3>
                       <div className="flex items-center space-x-4">
-                        <p className="text-lg font-medium">{new Date(campeonato.dataCampeonato).toLocaleDateString()}</p>
+                        <p className="text-lg font-medium">
+                          {new Date(campeonato.dataCampeonato).toLocaleDateString("pt-BR", {
+                            timeZone: "America/Sao_Paulo" 
+                          })}
+                        </p>
                         <div className="relative">
                           <button
+                            ref={buttonRef}
                             className="text-white focus:outline-none"
-                            onClick={() => setMenuOpen((prev) => !prev)}
+                            onClick={() => setOpenMenuId(openMenuId === campeonato.id ? null : campeonato.id)}
                             aria-label="Opções do campeonato"
                           >
                             <HiDotsVertical size={23} />
                           </button>
-                          {menuOpen && (
-                            <ul className="absolute right-0 top-12 bg-white text-black rounded-lg shadow-lg w-48 z-10 p-2 space-y-2 transition-all ease-in-out duration-300">
+                          {openMenuId === campeonato.id && (
+                            <ul ref={menuRef} className="absolute right-0 top-12 bg-white text-black rounded-lg shadow-lg w-48 z-10 p-2 space-y-2 transition-all ease-in-out duration-300">
                               <li>
                                 <Link
                                   to={`/jogos/${campeonato.linkAcesso}`}
@@ -146,7 +175,7 @@ console.log('error:', error);
                                 <button
                                   onClick={() => {
                                     handleCopyLink(campeonato.linkAcesso);
-                                    setMenuOpen(false);  
+                                    setOpenMenuId(null);
                                   }}
                                   className="block w-full text-left px-4 py-2 hover:bg-gray-200 rounded-lg"
                                 >
@@ -157,7 +186,7 @@ console.log('error:', error);
                                 <button
                                   onClick={() => {
                                     handleDelete(campeonato.id);
-                                    setMenuOpen(false);  
+                                    setOpenMenuId(null);
                                   }}
                                   className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600 rounded-lg"
                                 >
@@ -173,17 +202,21 @@ console.log('error:', error);
               </ul>
             )}
           </div>
+
+          {alertVisible && (
+            <Alert message={alertMessage} onClose={() => setAlertVisible(false)} />
+          )}
         </div>
-        </div>
-        <Footer />
-        <ModalConfirmacao
-          isOpen={modalOpen}
-          onConfirm={confirmDelete}
-          onCancel={cancelDelete}
-          message="Tem certeza de que deseja excluir este campeonato?"
-        />
       </div>
+      <Footer />
+      <ModalConfirmacao
+        isOpen={modalOpen}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+        message="Tem certeza de que deseja excluir este campeonato?"
+      />
+    </div>
   );
 };
 
-export default Agendados;
+export default Agendados;
