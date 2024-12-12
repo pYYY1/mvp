@@ -56,11 +56,11 @@ export default function GameScreen1() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-3 shadow-md">
+          <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-3 shadow-md">
             <p className="text-2xl font-semibold text-custom-green-3 mb-2">
               Data do Campeonato:
             </p>
-            <div className="flex items-center bg-custom-green-3 rounded-md w-60 px-2 py-1 mt-2 border border-custom-green-2">
+            <div className="flex items-center bg-custom-green-3 rounded-xl w-56 px-2 py-1 mt-2 border border-custom-green-2">
               <input
                 type="date"
                 id="date"
@@ -74,11 +74,11 @@ export default function GameScreen1() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-3 shadow-md">
+          <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-3 shadow-md">
             <p className="text-2xl font-semibold text-custom-green-3 mb-2">
               Horário de Início:
             </p>
-            <div className="flex items-center bg-custom-green-3 rounded-md w-60 px-2 py-1 mt-2 border border-custom-green-2">
+            <div className="flex items-center bg-custom-green-3 rounded-xl w-56 px-2 py-1 mt-2 border border-custom-green-2">
               <input
                 type="time"
                 id="time"
@@ -92,11 +92,11 @@ export default function GameScreen1() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <div className="flex flex-col items-center bg-custom-green-2 rounded-xl w-11/12 max-w-sm p-3 shadow-md">
+          <div className="flex flex-col items-center bg-custom-green-2 rounded-3xl w-11/12 max-w-sm p-3 shadow-md">
             <p className="text-2xl font-semibold text-custom-green-3 mb-2">
               Duração de Partida:
             </p>
-            <div className="flex items-center bg-custom-green-3 rounded-md w-60 px-2 py-1 mt-2 border border-custom-green-2">
+            <div className="flex items-center bg-custom-green-3 rounded-xl w-56 px-2 py-1 mt-2 border border-custom-green-2">
               <span className="text-custom-green-2 mr-2">
                 <i className="fas fa-hourglass-half"></i>
               </span>

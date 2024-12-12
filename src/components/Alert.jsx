@@ -36,4 +36,4 @@ const Alert = ({ message, onClose }) => {
   );
 };
 
-export default Alert;
+export default Alert;
