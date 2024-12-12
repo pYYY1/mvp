@@ -225,32 +225,6 @@ const Jogos = () => {
         onCancel={() => setModalOpen(false)}
         message={
           <div>
-            <h2 className="text-xl font-bold text-center mb-4 text-custom-green-2">Resultado Final</h2>
-            <div className="mb-4 flex space-x-4 items-center">
-              <div className="flex-1">
-                <label className="block text-md font-semibold text-custom-green-1">
-                  {placar.timeCasaNome}
-                </label>
-                <input
-                  type="number"
-                  value={placar.pontosCasa}
-                  onChange={(e) => setPlacar({ ...placar, pontosCasa: e.target.value })}
-                  className="mt-1 block w-full rounded-lg border-custom-green-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-10 bg-white border-2 text-center"
-                />
-              </div>
-              <span className="text-lg font-bold text-center">x</span>
-              <div className="flex-1">
-                <label className="block text-md font-semibold text-custom-green-1">
-                  {placar.timeVisitanteNome}
-                </label>
-                <input
-                  type="number"
-                  value={placar.pontosVisitante}
-                  onChange={(e) => setPlacar({ ...placar, pontosVisitante: e.target.value })}
-                  className="mt-1 block w-full rounded-lg border-custom-green-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-10 bg-white border-2 text-center"
-                />
-              </div>
-            </div>
             <h3 className="text-lg font-bold text-center mb-4 text-custom-green-2">Resultado dos Sets</h3>
             {placar.sets.map((set, setIndex) => (
               <div key={setIndex} className="mb-4">
