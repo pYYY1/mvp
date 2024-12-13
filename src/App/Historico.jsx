@@ -146,9 +146,7 @@ const Historico = () => {
                       <h3 className="text-base font-semibold">{campeonato.nome}</h3>
                       <div className="flex items-center space-x-4">
                         <p className="text-lg font-medium">
-                          {new Date(campeonato.dataCampeonato).toLocaleDateString("pt-BR", {
-                            timeZone: "America/Sao_Paulo" 
-                          })}
+                          {new Date(campeonato.dataCampeonato).toISOString().split('T')[0].split('-').reverse().join('/')}
                         </p>
                         <div className="relative">
                           <button
